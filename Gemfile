@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 
 # Go crazy fast with puma
 gem 'puma'
+gem 'foreman'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -71,3 +72,4 @@ gem 'capybara', group: [:test]
 gem 'capybara-webkit', group: [:test]
 gem 'factory_girl_rails', group: [:test], require: false
 gem 'database_cleaner', group: [:development, :test]
+gem 'shoulda-matchers', group: [:test]

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ProjectsController do
+  before do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
 
   describe :index do
     let(:project) { double(:project) }
