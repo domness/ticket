@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ticket_development
+  pool: 5
+  username: postgres
+  password:
+  sslmode: disable
+
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: ticket_test
+  pool: 5
+  username: postgres
+  password:
