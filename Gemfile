@@ -60,3 +60,6 @@ gem 'cane'
 
 # Use bootstrap 3
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+
+# Make forms easier and quicker to setup
+gem 'simple_form'
