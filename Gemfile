@@ -63,3 +63,8 @@ gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 
 # Make forms easier and quicker to setup
 gem 'simple_form'
+
+gem 'capybara', group: [:test]
+gem 'capybara-webkit', group: [:test]
+gem 'factory_girl_rails', group: [:test], require: false
+gem 'database_cleaner', group: [:development, :test]
