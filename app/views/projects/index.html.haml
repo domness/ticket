@@ -6,6 +6,6 @@
       %h4
         = project.name
         = link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-default'
-        = link_to 'Delete', project_path(project), class: 'btn btn-sm btn-danger', method: :delete, confirm: 'Are you sure you want to remove this project?'
+        = link_to 'Delete', project_path(project), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure you want to remove this project?' }
 
 = link_to 'New Project', new_project_path, class: 'btn btn-primary'
