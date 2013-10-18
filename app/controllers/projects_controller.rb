@@ -34,6 +34,10 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
+  def show
+    @project = Project.includes(:items).find(params[:id])
+  end
+
   private
 
     def find_project

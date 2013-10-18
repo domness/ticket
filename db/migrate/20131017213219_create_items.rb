@@ -4,14 +4,15 @@ class CreateItems < ActiveRecord::Migration
       t.references  :project
       t.belongs_to  :creator
       t.belongs_to  :assignee
-      t.string      :status
+      t.string      :status, default: 'backlog'
       t.integer     :number
-      t.string      :score
+      t.integer     :score
       t.text        :description
       t.string      :who
       t.string      :what
       t.string      :why
-      t.string      :type
+      t.string      :item_type
+      t.string      :title
       t.timestamps
     end
   end

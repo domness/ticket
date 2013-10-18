@@ -1,10 +1,10 @@
 %h1 Projects
 
-%ul
+%ul#projects
   - @projects.each do |project|
     %li
-      %h4
-        = project.name
+      .title= link_to project.name, project_path(project)
+      .links
         = link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-default'
         = link_to 'Delete', project_path(project), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure you want to remove this project?' }
 

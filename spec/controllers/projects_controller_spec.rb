@@ -146,4 +146,21 @@ describe ProjectsController do
     end
   end
 
+  describe :show do
+    let(:project) { double(:project, name: 'Test project') }
+    before do
+      Project.stub_chain(:includes, find: project)
+    end
+
+    it 'finds the project' do
+      get :show, id: 1
+      expect(assigns[:project]).to eq(project)
+    end
+
+    it 'renders 200 success' do
+      get :show, id: 1
+      expect(response.status).to eq(200)
+    end
+  end
+
 end

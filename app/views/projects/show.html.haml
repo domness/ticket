@@ -1,0 +1,9 @@
+%h1= @project.name
+
+= link_to "New Item", new_project_item_path(@project), class: "btn btn-primary"
+
+%h2 Backlog
+
+%ul
+  - @project.items.backlog.each do |item|
+    %li= item.who

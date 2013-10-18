@@ -1,0 +1,14 @@
+%h1 New Story
+
+= simple_form_for [@project, @item] do |f|
+  = f.input :item_type, as: :hidden, input_html: { value: "story" }
+  %p As an
+  = f.input :who, label: false, placeholder: "e.g. accountant", autofocus: true
+  %p I want
+  = f.input :what, label: false, placeholder: "e.g. Quickbooks integration"
+  %p So that
+  = f.input :why, label: false, placeholder: "e.g. I don't have to import CSVs daily"
+  = f.input :description, label: false, placeholder: "Add a description here..."
+  = f.input :assignee_id, label: false, collection: User.all
+  = f.input :score, collection: Item.score_collection, include_blank: false
+  = f.submit "Save", class: "btn btn-primary"
