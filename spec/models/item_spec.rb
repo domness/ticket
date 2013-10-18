@@ -11,12 +11,14 @@ describe Item do
     it { should validate_presence_of :project_id }
     it { should validate_presence_of :creator_id }
     it { should validate_presence_of :item_type }
-    it { should ensure_inclusion_of(:item_type).in_array(['story', 'task', 'defect', 'test']) }
+    it { should ensure_inclusion_of(:item_type)
+         .in_array(['story', 'task', 'defect', 'test']) }
   end
 
   describe :score_collection do
     it 'returns possible score values' do
-      expect(Item.score_collection).to eq({'?' => '1', 'S' => '1', 'M' => '2', 'L' => '3', 'XL' => '5'})
+      expect(Item.score_collection).to eq({'?' => '1', 'S' => '1', 'M' => '2',
+                                           'L' => '3', 'XL' => '5'})
     end
   end
 

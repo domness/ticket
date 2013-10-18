@@ -35,7 +35,9 @@ describe ItemsController do
     end
 
     it 'initialises the new item from the parameters' do
-      expect(Item).to receive(:new).with({'description'=>'Test'}).and_return(item)
+      expect(Item).to receive(:new).with({'description'=>'Test'})
+                                   .and_return(item)
+
       post :create, project_id: 1, item: { description: 'Test' }
     end
 
