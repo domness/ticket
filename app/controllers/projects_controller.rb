@@ -1,3 +1,4 @@
+# Defines user interactions with projects
 class ProjectsController < ApplicationController
   before_filter :find_project, only: [:edit, :update, :destroy]
 

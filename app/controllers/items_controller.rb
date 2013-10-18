@@ -1,3 +1,4 @@
+# Defines creation of items within a project
 class ItemsController < ApplicationController
   before_filter :find_project
 
@@ -23,7 +24,9 @@ class ItemsController < ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(:title, :description, :status, :number, :store, :who, :what, :why, :item_type, :assignee_id)
+      params.require(:item).permit(:title, :description, :status, :number,
+                                   :store, :who, :what, :why, :item_type,
+                                   :assignee_id)
     end
 
 end

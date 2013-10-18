@@ -43,7 +43,9 @@ describe ProjectsController do
     end
 
     it 'initialises the new project from the parameters' do
-      expect(Project).to receive(:new).with({'name'=>'Test'}).and_return(project)
+      expect(Project).to receive(:new).with({'name'=>'Test'})
+                                      .and_return(project)
+
       post :create, project: { name: 'Test' }
     end
 
