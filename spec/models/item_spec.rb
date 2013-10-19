@@ -17,8 +17,15 @@ describe Item do
 
   describe :score_collection do
     it 'returns possible score values' do
-      expect(Item.score_collection).to eq({'?' => '1', 'S' => '1', 'M' => '2',
+      expect(Item.score_collection).to eq({'?' => '0', 'S' => '1', 'M' => '2',
                                            'L' => '3', 'XL' => '5'})
+    end
+  end
+
+  describe :score_to_text do
+    it 'returns the score values to the text values' do
+      expect(Item.score_to_text).to eq({'0' => '?', '1' => 'S', '2' => 'M',
+                                        '3' => 'L', '5' => 'XL'})
     end
   end
 
@@ -33,6 +40,39 @@ describe Item do
 
     it "doesn't get items that aren't in the backlog" do
       expect(backlog).not_to include(current_item)
+    end
+  end
+
+  describe :assigned_to do
+    context 'when the item is not assigned' do
+      it 'returns unassigned' do
+        item = Item.new
+        expect(item.assigned_to).to eq('unassigned')
+      end
+    end
+
+    context 'when the item is assigned to someone' do
+      it 'returns the assignees name' do
+        item = Item.new
+        item.stub(assignee: User.new(first_name: 'John', last_name: 'Doe'))
+        expect(item.assigned_to).to eq('John Doe')
+      end
+    end
+  end
+
+  describe :human_score do
+    context 'when the score is nil' do
+      it 'returns ?' do
+        item = Item.new
+        expect(item.human_score).to eq('?')
+      end
+    end
+
+    context 'when the score is not nil' do
+      it 'returns the score in a t-shirt size' do
+        item = Item.new(score: 2)
+        expect(item.human_score).to eq('M')
+      end
     end
   end
 end

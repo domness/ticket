@@ -5,7 +5,11 @@ class Item < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   SCORE_COLLECTION = {
-    '?' => '1', 'S' => '1', 'M' => '2', 'L' => '3', 'XL' => '5'
+    '?' => '0', 'S' => '1', 'M' => '2', 'L' => '3', 'XL' => '5'
+  }
+
+  SCORE_TO_TEXT = {
+    '0' => '?', '1' => 'S', '2' => 'M', '3' => 'L', '5' => 'XL'
   }
 
   validates_presence_of :project_id, :creator_id, :item_type
@@ -15,6 +19,18 @@ class Item < ActiveRecord::Base
 
   def self.score_collection
     SCORE_COLLECTION
+  end
+
+  def self.score_to_text
+    SCORE_TO_TEXT
+  end
+
+  def assigned_to
+    assignee ? assignee.to_s : 'unassigned'
+  end
+
+  def human_score
+    Item.score_to_text["#{self.score}"]
   end
 
   # title: returns all the details regarding the ticket text if it's a story

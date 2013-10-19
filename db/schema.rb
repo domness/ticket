@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20131017214145) do
     t.integer  "assignee_id"
     t.string   "status",      default: "backlog"
     t.integer  "number"
-    t.integer  "score"
+    t.integer  "score",       default: 0
     t.text     "description"
     t.string   "who"
     t.string   "what"

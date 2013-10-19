@@ -4,6 +4,15 @@
 
 %h2 Backlog
 
-%ul
+%ul#items
   - @project.items.backlog.each do |item|
-    %li= item.who
+    %li.story
+      .status
+        %span.score= item.human_score
+        %span= item.assigned_to
+      %span.as As a
+      %span.who= item.who
+      %span.i-want I want
+      %span.what= item.what
+      %span.so-that so that
+      %span.why= item.why

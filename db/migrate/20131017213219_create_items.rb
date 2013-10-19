@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.belongs_to  :assignee
       t.string      :status, default: 'backlog'
       t.integer     :number
-      t.integer     :score
+      t.integer     :score, default: 0
       t.text        :description
       t.string      :who
       t.string      :what
