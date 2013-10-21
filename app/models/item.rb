@@ -21,6 +21,10 @@ class Item < ActiveRecord::Base
 
   before_create :set_number
 
+  def self.item_types
+    %w( story task defect test )
+  end
+
   def self.score_collection
     SCORE_COLLECTION
   end

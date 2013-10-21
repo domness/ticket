@@ -1,13 +1,7 @@
 ul#items {
   padding: 0;
   li.item {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 5px;
     list-style-type: none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
     .item-status {
       .item-buttons {
         & a {
@@ -15,22 +9,19 @@ ul#items {
         }
       }
       .score {}
-      .assigned-to {}
+      .assigned-to {
+        font-size: 12px;
+        font-weight: 600;
+      }
     }
     .item-content {
-      padding: 5px;
-      margin: 5px 0;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      border-radius: 3px;
-      .item-number {}
-      .item-links {}
-    }
-    &.story {
-      .item-content {
-        background: #E4EFCF;
-        border: 1px solid #D2DBBF;
+      color: rgba(0, 0, 0, 0.75);
+      .item-number {
+        margin-top: 5px;
+        color: rgba(0, 0, 0, 0.25);
+        font-size: 0.9em;
       }
+      .item-links {}
     }
   }
 }

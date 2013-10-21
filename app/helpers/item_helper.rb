@@ -20,4 +20,18 @@ module ItemHelper
     end
   end
 
+  def item_panel_class(item_type)
+    case item_type
+    when 'story'
+      'panel-success'
+    when 'test'
+      'panel-info'
+    when 'task'
+      'panel-warning'
+    when 'defect'
+      'panel-danger'
+    else
+    end
+  end
+
 end

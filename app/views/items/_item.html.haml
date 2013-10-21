@@ -1,21 +1,31 @@
 %li{ class: "item #{item.item_type}" }
-  .item-status
-    .item-buttons.pull-right
-      = item_buttons(project, item)
-    %span.score= item.human_score
-    %span.assigned-to= item.assigned_to
-    .clearfix
-  .item-content
-    %span.as As a
-    %span.who= item.who
-    %span.i-want I want
-    %span.what= item.what
-    %span.so-that so that
-    %span.why= item.why
-    .item-number
-      .pull-left= "##{item.number}"
-    .item-links
-      .pull-right
-        = link_to 'Edit', edit_project_item_path(project, item), class: 'btn btn-xs btn-default'
-        = link_to 'Delete', project_item_path(project, item), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure you want to delete this item?' }
-    .clearfix
+  .panel{ class: item_panel_class(item.item_type) }
+    .panel-heading
+      .item-status
+        .item-buttons.pull-right
+          = item_buttons(project, item)
+        %span.score
+          %span= item.human_score
+        %span.assigned-to= item.assigned_to.titleize
+        .clearfix
+    .panel-body
+      .item-content
+        - if item.item_type == 'story'
+          %span.as As a
+          %span.who= item.who
+          %span.i-want I want
+          %span.what= item.what
+          %span.so-that so that
+          %span.why= item.why
+        - else
+          %span.title= item.title
+
+        .item-number
+          = "##{item.number}"
+        .clearfix
+    .panel-footer
+      .item-links
+        .pull-right
+          = link_to 'Edit', edit_project_item_path(project, item), class: 'btn btn-xs'
+          = link_to 'Delete', project_item_path(project, item), class: 'btn btn-xs text-danger', method: :delete, data: { confirm: 'Are you sure you want to delete this item?' }
+      .clearfix

@@ -60,6 +60,12 @@ describe Item do
     end
   end
 
+  describe :item_types do
+    it 'returns the allowed item types' do
+      expect(Item.item_types).to eq(['story', 'task', 'defect', 'test'])
+    end
+  end
+
   describe :score_collection do
     it 'returns possible score values' do
       expect(Item.score_collection).to eq({'?' => '0', 'S' => '1', 'M' => '2',

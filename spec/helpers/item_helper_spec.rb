@@ -57,7 +57,24 @@ describe ItemHelper do
         expect(@buttons).to include('/projects/1/items/2/reject')
       end
     end
+  end
 
+  describe :item_panel_class do
+    it "returns the panel class for stories" do
+      item_panel_class('story').should == "panel-success"
+    end
+
+    it "returns the panel class for tasks" do
+      item_panel_class('task').should == "panel-warning"
+    end
+
+    it "returns the panel class for defects" do
+      item_panel_class('defect').should == "panel-danger"
+    end
+
+    it "returns the panel class for tests" do
+      item_panel_class('test').should == "panel-info"
+    end
   end
 
 end
