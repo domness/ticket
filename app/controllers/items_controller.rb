@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:title, :description, :status, :number,
-                                   :store, :who, :what, :why, :item_type,
+                                   :score, :who, :what, :why, :item_type,
                                    :assignee_id)
     end
 
