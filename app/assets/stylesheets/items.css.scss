@@ -8,7 +8,10 @@ ul#items {
           margin: 0 0 0 5px;
         }
       }
-      .score {}
+      .score {
+        font-weight: 600;
+        margin-right: 5px;
+      }
       .assigned-to {
         font-size: 12px;
         font-weight: 600;
@@ -21,7 +24,9 @@ ul#items {
         color: rgba(0, 0, 0, 0.25);
         font-size: 0.9em;
       }
-      .item-links {}
+      .item-links {
+        margin: 5px auto -5px auto;
+      }
     }
   }
 }

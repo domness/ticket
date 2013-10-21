@@ -1,14 +1,15 @@
 ul#projects {
-  margin: 40px;
+  margin: 20px auto;
+  padding: 0;
   li {
     list-style-type: none;
     .title {
-      font-size: 1.5em;
+      font-size: 17px;
       display: inline-block;
     }
     .links {
       display: inline-block;
-      margin-left: 20px;
+      margin-left: 5px;
     }
   }
 }
