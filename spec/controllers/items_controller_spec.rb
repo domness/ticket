@@ -27,6 +27,27 @@ describe ItemsController do
     end
   end
 
+  describe :edit do
+    let(:item) { double(:item, id: 2) }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+      get :edit, project_id: 1, id: 2
+    end
+
+    it 'returns 200 success' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'finds the item' do
+      expect(assigns[:item]).to eq(item)
+    end
+
+    it 'finds the project' do
+      expect(assigns[:project]).to eq(project)
+    end
+  end
+
   describe :create do
     let(:item) { double(:item, save: true).as_null_object }
     before do
@@ -76,6 +97,44 @@ describe ItemsController do
       it 'renders the new template' do
         post :create, project_id: 1, item: { description: 'Test' }
         expect(response).to render_template 'new'
+      end
+    end
+  end
+
+  describe :update do
+    let(:item) { double(:item, id: 2, update_attributes: true) }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+    end
+
+    it 'finds the item' do
+      put :update, project_id: 1, id: 2, item: { description: 'test' }
+      expect(assigns[:item]).to eq(item)
+    end
+
+    it 'finds the project' do
+      put :update, project_id: 1, id: 2, item: { description: 'test' }
+      expect(assigns[:project]).to eq(project)
+    end
+
+    it 'updates the item' do
+      expect(item).to receive(:update_attributes)
+      put :update, project_id: 1, id: 2, item: { description: 'test' }
+    end
+
+    context 'when update is successful' do
+      it 'redirects to the project#show' do
+        put :update, project_id: 1, id: 2, item: { description: 'test' }
+        expect(response).to redirect_to(project_path(project))
+      end
+    end
+
+    context 'when update is not successful' do
+      it 'renders the form' do
+        item.stub(update_attributes: false)
+        put :update, project_id: 1, id: 2, item: { description: 'test' }
+        expect(response).to render_template('edit')
       end
     end
   end
