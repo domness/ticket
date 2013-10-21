@@ -1,0 +1,13 @@
+%li{ class: item.item_type }
+  .status
+    .buttons.pull-right
+      = item_buttons(project, item)
+    %span.score= item.human_score
+    %span= item.assigned_to
+    .clearfix
+  %span.as As a
+  %span.who= item.who
+  %span.i-want I want
+  %span.what= item.what
+  %span.so-that so that
+  %span.why= item.why

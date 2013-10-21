@@ -16,6 +16,8 @@ class Item < ActiveRecord::Base
   validates_inclusion_of :item_type, :in => %w( story task defect test )
 
   scope :backlog, -> { where(status: 'backlog') }
+  scope :current, -> { where(status: 'current') }
+  scope :completed, -> { where(status: 'complete') }
 
   def self.score_collection
     SCORE_COLLECTION
@@ -23,6 +25,14 @@ class Item < ActiveRecord::Base
 
   def self.score_to_text
     SCORE_TO_TEXT
+  end
+
+  def backlog?
+    self.status == 'backlog'
+  end
+
+  def current?
+    self.status == 'current'
   end
 
   def assigned_to
@@ -33,6 +43,18 @@ class Item < ActiveRecord::Base
     Item.score_to_text["#{self.score}"]
   end
 
-  # title: returns all the details regarding the ticket text if it's a story
-  # i.e. who + what + why
+  def start
+    self.status = 'current'
+    self.save
+  end
+
+  def stop
+    self.status = 'backlog'
+    self.save
+  end
+
+  def complete
+    self.status = 'complete'
+    self.save
+  end
 end

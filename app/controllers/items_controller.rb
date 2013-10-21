@@ -1,6 +1,7 @@
 # Defines creation of items within a project
 class ItemsController < ApplicationController
   before_filter :find_project
+  before_filter :find_item, only: [:start, :stop, :complete]
 
   def new
     @item = Item.new
@@ -17,6 +18,21 @@ class ItemsController < ApplicationController
     end
   end
 
+  def start
+    @item.start
+    redirect_to project_path(@project)
+  end
+
+  def stop
+    @item.stop
+    redirect_to project_path(@project)
+  end
+
+  def complete
+    @item.complete
+    redirect_to project_path(@project)
+  end
+
   private
 
     def find_project
@@ -27,6 +43,10 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:title, :description, :status, :number,
                                    :store, :who, :what, :why, :item_type,
                                    :assignee_id)
+    end
+
+    def find_item
+      @item = Item.find(params[:id])
     end
 
 end

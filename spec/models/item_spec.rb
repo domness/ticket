@@ -29,6 +29,38 @@ describe Item do
     end
   end
 
+  describe :backlog? do
+    context 'when the item is in the backlog' do
+      it 'returns true' do
+        item = Item.new(status: 'backlog')
+        expect(item.backlog?).to be(true)
+      end
+    end
+
+    context 'when the item is not in the backlog' do
+      it 'returns false' do
+        item = Item.new(status: 'current')
+        expect(item.backlog?).to be(false)
+      end
+    end
+  end
+
+  describe :current? do
+    context 'when the item is in current' do
+      it 'returns true' do
+        item = Item.new(status: 'current')
+        expect(item.current?).to be(true)
+      end
+    end
+
+    context 'when the item is not in current' do
+      it 'returns false' do
+        item = Item.new(status: 'backlog')
+        expect(item.current?).to be(false)
+      end
+    end
+  end
+
   describe :backlog do
     let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
     let(:current_item) { FactoryGirl.create(:item, status: 'current') }
@@ -40,6 +72,35 @@ describe Item do
 
     it "doesn't get items that aren't in the backlog" do
       expect(backlog).not_to include(current_item)
+    end
+  end
+
+  describe :current do
+    let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
+    let(:current_item) { FactoryGirl.create(:item, status: 'current') }
+    let(:current) { Item.current }
+
+    it 'gets all the items with the status of current' do
+      expect(current).to include(current_item)
+    end
+
+    it "doesn't get items that aren't in current" do
+      expect(current).not_to include(backlog_item)
+    end
+  end
+
+  describe :completed do
+    let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
+    let(:current_item) { FactoryGirl.create(:item, status: 'current') }
+    let(:complete_item) { FactoryGirl.create(:item, status: 'complete') }
+    let(:completed) { Item.completed }
+
+    it 'gets all the items with the status of current' do
+      expect(completed).to include(complete_item)
+    end
+
+    it "doesn't get items that aren't in current" do
+      expect(completed).not_to include([backlog_item, current_item])
     end
   end
 
@@ -73,6 +134,46 @@ describe Item do
         item = Item.new(score: 2)
         expect(item.human_score).to eq('M')
       end
+    end
+  end
+
+  describe :start do
+    it 'changes the status to current' do
+      item = Item.new(status: 'backlog')
+      expect{item.start}.to change{item.status}.from('backlog').to('current')
+    end
+
+    it 'saves the item' do
+      item = Item.new(status: 'backlog')
+      expect(item).to receive(:save)
+      item.start
+    end
+  end
+
+  describe :stop do
+    it 'changes the status to backlog' do
+      item = Item.new(status: 'current')
+      expect{item.stop}.to change{item.status}.from('current').to('backlog')
+    end
+
+    it 'saves the item' do
+      item = Item.new(status: 'current')
+      expect(item).to receive(:save)
+      item.stop
+    end
+  end
+
+  describe :complete do
+    it 'changes the status to complete' do
+      item = Item.new(status: 'current')
+      expect{item.complete}.to  change{item.status}.
+                                from('current').to('complete')
+    end
+
+    it 'saves the item' do
+      item = Item.new(status: 'current')
+      expect(item).to receive(:save)
+      item.complete
     end
   end
 end

@@ -1,18 +1,26 @@
 %h1= @project.name
 
-= link_to "New Item", new_project_item_path(@project), class: "btn btn-primary"
+= link_to 'New Item', new_project_item_path(@project), class: 'btn btn-primary'
 
-%h2 Backlog
+.row
 
-%ul#items
-  - @project.items.backlog.each do |item|
-    %li.story
-      .status
-        %span.score= item.human_score
-        %span= item.assigned_to
-      %span.as As a
-      %span.who= item.who
-      %span.i-want I want
-      %span.what= item.what
-      %span.so-that so that
-      %span.why= item.why
+  .col-sm-4
+    %h2.text-center Backlog
+
+    %ul#items
+      - @project.items.backlog.each do |item|
+        = render 'items/item', project: @project, item: item
+
+  .col-sm-4
+    %h2.text-center Current
+
+    %ul#items
+      - @project.items.current.each do |item|
+        = render 'items/item', project: @project, item: item
+
+  .col-sm-4
+    %h2.text-center Complete
+
+    %ul#items
+      - @project.items.completed.each do |item|
+        = render 'items/item', project: @project, item: item

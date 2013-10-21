@@ -4,7 +4,11 @@ Ticket::Application.routes.draw do
   root 'pages#index'
 
   resources :projects do
-    resources :items
+    resources :items do
+      put :start, on: :member
+      put :stop, on: :member
+      put :complete, on: :member
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

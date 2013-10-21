@@ -80,4 +80,58 @@ describe ItemsController do
     end
   end
 
+  describe :start do
+    let(:item) { double(:item, status: 'backlog', save: true).as_null_object }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+    end
+
+    it 'calls start on the item' do
+      expect(item).to receive(:start)
+      put :start, project_id: 1, id: 1
+    end
+
+    it 'redirects to the project#show' do
+      put :start, project_id: 1, id: 1
+      expect(response).to redirect_to project_path(project)
+    end
+  end
+
+  describe :stop do
+    let(:item) { double(:item, status: 'current', save: true).as_null_object }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+    end
+
+    it 'calls stop on the item' do
+      expect(item).to receive(:stop)
+      put :stop, project_id: 1, id: 1
+    end
+
+    it 'redirects to the project#show' do
+      put :stop, project_id: 1, id: 1
+      expect(response).to redirect_to project_path(project)
+    end
+  end
+
+  describe :complete do
+    let(:item) { double(:item, status: 'current', save: true).as_null_object }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+    end
+
+    it 'calls complete on the item' do
+      expect(item).to receive(:complete)
+      put :complete, project_id: 1, id: 1
+    end
+
+    it 'redirects to the project#show' do
+      put :complete, project_id: 1, id: 1
+      expect(response).to redirect_to project_path(project)
+    end
+  end
+
 end
