@@ -15,6 +15,51 @@ describe Item do
          .in_array(['story', 'task', 'defect', 'test']) }
   end
 
+  describe 'scopes' do
+    describe :backlog do
+      let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
+      let(:current_item) { FactoryGirl.create(:item, status: 'current') }
+      let(:backlog) { Item.backlog }
+
+      it 'gets all the items with the status of backlog' do
+        expect(backlog).to include(backlog_item)
+      end
+
+      it "doesn't get items that aren't in the backlog" do
+        expect(backlog).not_to include(current_item)
+      end
+    end
+
+    describe :current do
+      let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
+      let(:current_item) { FactoryGirl.create(:item, status: 'current') }
+      let(:current) { Item.current }
+
+      it 'gets all the items with the status of current' do
+        expect(current).to include(current_item)
+      end
+
+      it "doesn't get items that aren't in current" do
+        expect(current).not_to include(backlog_item)
+      end
+    end
+
+    describe :completed do
+      let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
+      let(:current_item) { FactoryGirl.create(:item, status: 'current') }
+      let(:complete_item) { FactoryGirl.create(:item, status: 'complete') }
+      let(:completed) { Item.completed }
+
+      it 'gets all the items with the status of current' do
+        expect(completed).to include(complete_item)
+      end
+
+      it "doesn't get items that aren't in current" do
+        expect(completed).not_to include([backlog_item, current_item])
+      end
+    end
+  end
+
   describe :score_collection do
     it 'returns possible score values' do
       expect(Item.score_collection).to eq({'?' => '0', 'S' => '1', 'M' => '2',
@@ -83,49 +128,6 @@ describe Item do
         item = Item.new(status: 'backlog')
         expect(item.complete?).to be(false)
       end
-    end
-  end
-
-  describe :backlog do
-    let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
-    let(:current_item) { FactoryGirl.create(:item, status: 'current') }
-    let(:backlog) { Item.backlog }
-
-    it 'gets all the items with the status of backlog' do
-      expect(backlog).to include(backlog_item)
-    end
-
-    it "doesn't get items that aren't in the backlog" do
-      expect(backlog).not_to include(current_item)
-    end
-  end
-
-  describe :current do
-    let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
-    let(:current_item) { FactoryGirl.create(:item, status: 'current') }
-    let(:current) { Item.current }
-
-    it 'gets all the items with the status of current' do
-      expect(current).to include(current_item)
-    end
-
-    it "doesn't get items that aren't in current" do
-      expect(current).not_to include(backlog_item)
-    end
-  end
-
-  describe :completed do
-    let(:backlog_item) { FactoryGirl.create(:item, status: 'backlog') }
-    let(:current_item) { FactoryGirl.create(:item, status: 'current') }
-    let(:complete_item) { FactoryGirl.create(:item, status: 'complete') }
-    let(:completed) { Item.completed }
-
-    it 'gets all the items with the status of current' do
-      expect(completed).to include(complete_item)
-    end
-
-    it "doesn't get items that aren't in current" do
-      expect(completed).not_to include([backlog_item, current_item])
     end
   end
 

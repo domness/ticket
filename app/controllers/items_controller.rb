@@ -1,8 +1,9 @@
 # Defines creation of items within a project
 class ItemsController < ApplicationController
   before_filter :find_project
-  before_filter :find_item, only:
-                [:edit, :update, :start, :stop, :complete, :reject]
+  before_filter :find_item, only: [
+                :edit, :update, :start, :stop,
+                :complete, :reject, :destroy]
 
   def new
     @item = Item.new
@@ -47,6 +48,11 @@ class ItemsController < ApplicationController
 
   def reject
     @item.start
+    redirect_to project_path(@project)
+  end
+
+  def destroy
+    @item.destroy
     redirect_to project_path(@project)
   end
 

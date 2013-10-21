@@ -211,4 +211,29 @@ describe ItemsController do
     end
   end
 
+  describe :destroy do
+    let(:item) { double(:item).as_null_object }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+      delete :destroy, project_id: 1, id: 2
+    end
+
+    it 'finds the project' do
+      expect(assigns[:project]).to eq(project)
+    end
+
+    it 'finds the item' do
+      expect(assigns[:item]).to eq(item)
+    end
+
+    it 'destroys the item' do
+      expect(item).to receive(:destroy)
+      delete :destroy, project_id: 1, id: 2
+    end
+
+    it 'redirects to the project#show' do
+      expect(response).to redirect_to(project_path(project))
+    end
+  end
 end
