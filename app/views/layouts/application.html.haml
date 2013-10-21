@@ -17,8 +17,16 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand(href=root_path) Ticket
+          - if @project
+            %a.navbar-brand{ href: project_path(@project) }= @project.name
+          - elsif user_signed_in?
+            %a.navbar-brand{ href: projects_path } Ticket
+          - else
+            %a.navbar-brand{ href: root_path } Ticket
         .navbar-collapse.collapse
+          - if @project
+            %ul.nav.navbar-nav
+              %li= link_to "All Projects", projects_path
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li= link_to "Sign out", destroy_user_session_path, method: :delete
