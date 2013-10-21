@@ -193,4 +193,22 @@ describe ItemsController do
     end
   end
 
+  describe :reject do
+    let(:item) { double(:item, status: 'complete', save: true).as_null_object }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+    end
+
+    it 'calls start on the item' do
+      expect(item).to receive(:start)
+      put :reject, project_id: 1, id: 1
+    end
+
+    it 'redirects to the project#show' do
+      put :reject, project_id: 1, id: 1
+      expect(response).to redirect_to project_path(project)
+    end
+  end
+
 end

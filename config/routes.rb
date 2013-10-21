@@ -8,6 +8,7 @@ Ticket::Application.routes.draw do
       put :start, on: :member
       put :stop, on: :member
       put :complete, on: :member
+      put :reject, on: :member
     end
   end
 

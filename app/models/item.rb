@@ -19,6 +19,8 @@ class Item < ActiveRecord::Base
   scope :current, -> { where(status: 'current') }
   scope :completed, -> { where(status: 'complete') }
 
+  before_create :set_number
+
   def self.score_collection
     SCORE_COLLECTION
   end
@@ -27,12 +29,20 @@ class Item < ActiveRecord::Base
     SCORE_TO_TEXT
   end
 
+  def set_number
+    self.number = self.project.items.count + 1
+  end
+
   def backlog?
     self.status == 'backlog'
   end
 
   def current?
     self.status == 'current'
+  end
+
+  def complete?
+    self.status == 'complete'
   end
 
   def assigned_to

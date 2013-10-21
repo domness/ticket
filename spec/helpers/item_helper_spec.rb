@@ -4,7 +4,7 @@ describe ItemHelper do
 
   describe :item_buttons do
     let(:project) { double(:project, id: 1) }
-    let(:item)    { double(:item, id: 2, backlog?: true) }
+    let(:item)    { double(:item, id: 2, status: 'backlog') }
 
     context 'item is in backlog' do
       before do
@@ -22,8 +22,7 @@ describe ItemHelper do
 
     context 'item is in current' do
       before do
-        item.stub(backlog?: false)
-        item.stub(current?: true)
+        item.stub(status: 'current')
         @buttons = item_buttons(project, item)
       end
 
@@ -43,6 +42,22 @@ describe ItemHelper do
         expect(@buttons).to include('/projects/1/items/2/complete')
       end
     end
+
+    context 'item is in complete' do
+      before do
+        item.stub(status: 'complete')
+        @buttons = item_buttons(project, item)
+      end
+
+      it 'includes the reject text'do
+        expect(@buttons).to include('Reject')
+      end
+
+      it 'renders the reject URL' do
+        expect(@buttons).to include('/projects/1/items/2/reject')
+      end
+    end
+
   end
 
 end

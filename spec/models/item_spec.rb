@@ -29,6 +29,15 @@ describe Item do
     end
   end
 
+  describe :set_number do
+    it 'adds 1 to the projects item count' do
+      item = FactoryGirl.build(:item)
+      item.stub_chain(:project, :items).and_return([double, double])
+      item.save
+      expect(item.number).to eq(3)
+    end
+  end
+
   describe :backlog? do
     context 'when the item is in the backlog' do
       it 'returns true' do
@@ -57,6 +66,22 @@ describe Item do
       it 'returns false' do
         item = Item.new(status: 'backlog')
         expect(item.current?).to be(false)
+      end
+    end
+  end
+
+  describe :complete? do
+    context 'when the item is in complete' do
+      it 'returns true' do
+        item = Item.new(status: 'complete')
+        expect(item.complete?).to be(true)
+      end
+    end
+
+    context 'when the item is not in complete' do
+      it 'returns false' do
+        item = Item.new(status: 'backlog')
+        expect(item.complete?).to be(false)
       end
     end
   end
