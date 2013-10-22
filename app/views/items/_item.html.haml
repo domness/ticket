@@ -1,4 +1,4 @@
-.panel{ class: item_panel_class(item.item_type) }
+.item.panel{ class: item_panel_class(item.item_type) }
   .panel-heading
     .item-status
       .item-buttons.pull-right
@@ -20,6 +20,9 @@
       - else
         = link_to project_item_path(project, item) do
           %span.title= item.title
+
+      - if show
+        .description= item.description
 
       .item-links
         .pull-left

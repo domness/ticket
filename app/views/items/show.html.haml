@@ -1,1 +1,4 @@
-= render 'items/item', project: @project, item: @item
+#item-show
+  = render 'items/item', project: @project, item: @item, show: true
+  #creator
+    = @item.created_at_string

@@ -209,4 +209,13 @@ describe Item do
       item.complete
     end
   end
+
+  describe :created_at_string do
+    it 'returns the creator and the time created' do
+      user = FactoryGirl.build(:user)
+      item = Item.new(created_at: 3.days.ago)
+      item.stub(creator: user)
+      expect(item.created_at_string).to eq("Created by #{user} 3 days ago")
+    end
+  end
 end

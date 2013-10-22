@@ -10,7 +10,7 @@
     %ul#items
       - @project.items.backlog.each do |item|
         %li{ class: "item #{item.item_type}" }
-          = render 'items/item', project: @project, item: item
+          = render 'items/item', project: @project, item: item, show: false
 
   .col-sm-4
     %h2.text-center Current
@@ -19,7 +19,7 @@
       - @project.items.current.each do |item|
         = link_to project_item_path(@project, item) do
           %li{ class: "item #{item.item_type}" }
-            = render 'items/item', project: @project, item: item
+            = render 'items/item', project: @project, item: item, show: false
 
   .col-sm-4
     %h2.text-center Complete
@@ -27,4 +27,4 @@
     %ul#items
       - @project.items.completed.each do |item|
         %li{ class: "item #{item.item_type}" }
-          = render 'items/item', project: @project, item: item
+          = render 'items/item', project: @project, item: item, show: false

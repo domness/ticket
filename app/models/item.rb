@@ -1,5 +1,7 @@
 # A single item/story assignment
 class Item < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
+
   belongs_to :project
   belongs_to :creator, class_name: 'User'
   belongs_to :assignee, class_name: 'User'
@@ -70,5 +72,9 @@ class Item < ActiveRecord::Base
   def complete
     self.status = 'complete'
     self.save
+  end
+
+  def created_at_string
+    "Created by #{self.creator} #{time_ago_in_words(self.created_at)} ago"
   end
 end

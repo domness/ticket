@@ -15,33 +15,43 @@
 
 ul#items {
   padding: 0;
-  li.item {
-    list-style-type: none;
-    .item-status {
-      .item-buttons {
-        & a {
-          margin: 0 0 0 5px;
-        }
-      }
-      .score {
-        font-weight: 600;
-        margin-right: 5px;
-      }
-      .assigned-to {
-        font-size: 12px;
-        font-weight: 600;
+}
+
+.item {
+  list-style-type: none;
+  .item-status {
+    .item-buttons {
+      & a {
+        margin: 0 0 0 5px;
       }
     }
-    .item-content {
-      color: rgba(0, 0, 0, 0.75);
-      .item-number {
-        margin-top: 5px;
-        color: rgba(0, 0, 0, 0.25);
-        font-size: 0.9em;
-      }
-      .item-links {
-        margin: 5px auto -5px auto;
-      }
+    .score {
+      font-weight: 600;
+      margin-right: 5px;
     }
+    .assigned-to {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+  .item-content {
+    color: rgba(0, 0, 0, 0.75);
+    .item-number {
+      margin-top: 5px;
+      color: rgba(0, 0, 0, 0.25);
+      font-size: 0.9em;
+    }
+    .item-links {
+      margin: 5px auto -5px auto;
+    }
+    .description {
+      margin: 10px auto;
+    }
+  }
+}
+
+#item-show {
+  #creator {
+    text-align: right;
   }
 }
