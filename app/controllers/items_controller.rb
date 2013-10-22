@@ -3,7 +3,8 @@ class ItemsController < ApplicationController
   before_filter :find_project
   before_filter :find_item, only: [
                 :edit, :update, :start, :stop,
-                :complete, :reject, :destroy]
+                :complete, :reject, :destroy,
+                :show]
 
   def new
     @item = Item.new
@@ -29,6 +30,9 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def show
   end
 
   def start

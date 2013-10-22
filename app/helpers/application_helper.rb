@@ -1,3 +1,4 @@
+# Defines helpers
 module ApplicationHelper
   def twitterized_type(type)
     case type

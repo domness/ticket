@@ -1,3 +1,18 @@
+#story-container {
+  display: inline-block;
+  .form-group, #item_who, #item_what {
+    display: inline-block;
+  }
+  #item_who {
+    width: 82%;
+    margin-left: 10px;
+  }
+  #item_what {
+    margin-left: 10px;
+    width: 80%;
+  }
+}
+
 ul#items {
   padding: 0;
   li.item {

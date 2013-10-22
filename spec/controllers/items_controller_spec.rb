@@ -48,6 +48,27 @@ describe ItemsController do
     end
   end
 
+  describe :show do
+    let(:item) { double(:item, id: 2) }
+    before do
+      Project.stub(find: project)
+      Item.stub(find: item)
+      get :show, project_id: 1, id: 2
+    end
+
+    it 'returns 200 success' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'finds the item' do
+      expect(assigns[:item]).to eq(item)
+    end
+
+    it 'finds the project' do
+      expect(assigns[:project]).to eq(project)
+    end
+  end
+
   describe :create do
     let(:item) { double(:item, save: true).as_null_object }
     before do

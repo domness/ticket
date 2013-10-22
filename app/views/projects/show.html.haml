@@ -9,18 +9,22 @@
 
     %ul#items
       - @project.items.backlog.each do |item|
-        = render 'items/item', project: @project, item: item
+        %li{ class: "item #{item.item_type}" }
+          = render 'items/item', project: @project, item: item
 
   .col-sm-4
     %h2.text-center Current
 
     %ul#items
       - @project.items.current.each do |item|
-        = render 'items/item', project: @project, item: item
+        = link_to project_item_path(@project, item) do
+          %li{ class: "item #{item.item_type}" }
+            = render 'items/item', project: @project, item: item
 
   .col-sm-4
     %h2.text-center Complete
 
     %ul#items
       - @project.items.completed.each do |item|
-        = render 'items/item', project: @project, item: item
+        %li{ class: "item #{item.item_type}" }
+          = render 'items/item', project: @project, item: item

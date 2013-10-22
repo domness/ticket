@@ -1,29 +1,30 @@
-%li{ class: "item #{item.item_type}" }
-  .panel{ class: item_panel_class(item.item_type) }
-    .panel-heading
-      .item-status
-        .item-buttons.pull-right
-          = item_buttons(project, item)
-        %span.score
-          %span= item.human_score
-        %span.assigned-to= item.assigned_to.titleize
-        .clearfix
-    .panel-body
-      .item-content
-        - if item.item_type == 'story'
+.panel{ class: item_panel_class(item.item_type) }
+  .panel-heading
+    .item-status
+      .item-buttons.pull-right
+        = item_buttons(project, item)
+      %span.score
+        %span= item.human_score
+      %span.assigned-to= item.assigned_to.titleize
+      .clearfix
+  .panel-body
+    .item-content
+      - if item.item_type == 'story'
+        = link_to project_item_path(project, item) do
           %span.as As a
           %span.who= item.who
           %span.i-want I want
           %span.what= item.what
           %span.so-that so that
           %span.why= item.why
-        - else
+      - else
+        = link_to project_item_path(project, item) do
           %span.title= item.title
 
-        .item-links
-          .pull-left
-            .item-number= "##{item.number}"
-          .pull-right
-            = link_to 'Edit', edit_project_item_path(project, item), class: 'btn btn-xs'
-            = link_to 'Delete', project_item_path(project, item), class: 'btn btn-xs text-danger', method: :delete, data: { confirm: 'Are you sure you want to delete this item?' }
-          .clearfix
+      .item-links
+        .pull-left
+          .item-number= "##{item.number}"
+        .pull-right
+          = link_to 'Edit', edit_project_item_path(project, item), class: 'btn btn-xs'
+          = link_to 'Delete', project_item_path(project, item), class: 'btn btn-xs text-danger', method: :delete, data: { confirm: 'Are you sure you want to delete this item?' }
+        .clearfix

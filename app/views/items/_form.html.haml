@@ -2,12 +2,13 @@
   = f.input :item_type, collection: Item.item_types, include_blank: false, label_method: :capitalize
   #story-container
     #story
-      %p As an
-      = f.input :who, label: false, placeholder: "e.g. accountant", autofocus: true
-      %p I want
-      = f.input :what, label: false, placeholder: "e.g. Quickbooks integration"
-      %p So that
-      = f.input :why, label: false, placeholder: "e.g. I don't have to import CSVs daily"
+      .row
+        .col-sm-6
+          = f.input :who, label: "As a", placeholder: "e.g. accountant", autofocus: true
+        .col-sm-6
+          = f.input :what, label: "I want", placeholder: "e.g. Quickbooks integration"
+
+      = f.input :why, label: "So that", placeholder: "e.g. I don't have to import CSVs daily"
   #task-container
     #task
       = f.input :title, placeholder: 'What is it?'
