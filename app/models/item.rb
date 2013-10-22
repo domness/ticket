@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   belongs_to :project
   belongs_to :creator, class_name: 'User'
   belongs_to :assignee, class_name: 'User'
+  has_many :comments
 
   SCORE_COLLECTION = {
     '?' => '0', 'S' => '1', 'M' => '2', 'L' => '3', 'XL' => '5'
