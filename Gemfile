@@ -68,8 +68,14 @@ gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 # Make forms easier and quicker to setup
 gem 'simple_form'
 
+# Use for end-to-end testing
 gem 'capybara', group: [:test]
 gem 'capybara-webkit', group: [:test]
+
+# Create reusable objects filled with data in specs
 gem 'factory_girl_rails', group: [:test], require: false
+
 gem 'database_cleaner', group: [:development, :test]
+
+# For simple should matches in specs
 gem 'shoulda-matchers', group: [:test]
