@@ -70,7 +70,7 @@ gem 'simple_form'
 
 # Use for end-to-end testing
 gem 'capybara', group: [:test]
-gem 'capybara-webkit', group: [:test]
+gem 'poltergeist', group: [:test]
 
 # Create reusable objects filled with data in specs
 gem 'factory_girl_rails', group: [:test], require: false

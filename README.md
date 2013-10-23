@@ -8,6 +8,7 @@ Dependencies:
 - Ruby v2.0.0
 - Rails v4.0
 - Postgres
+- PhantomJS
 
 ### Features
 
