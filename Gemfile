@@ -79,3 +79,6 @@ gem 'database_cleaner', group: [:development, :test]
 
 # For simple should matches in specs
 gem 'shoulda-matchers', group: [:test]
+
+# For showing test coverage
+gem 'simplecov', :require => false, :group => :test
